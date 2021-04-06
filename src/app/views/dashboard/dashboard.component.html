@@ -1,0 +1,62 @@
+<div class="grid-container" *ngIf="isReady === true">
+  <mat-grid-list cols="10" rowHeight="180px">
+    <mat-grid-tile
+      *ngFor="let card of cards | async"
+      [colspan]="card.cols"
+      [rowspan]="card.rows"
+    >
+      <mat-card class="dashboard-card">
+        <mat-card-content class="dashboard-card-content">
+          <div *ngIf="card.title !== 'User info'; else info" class="content">
+            <h1>{{ card.value }}</h1>
+            <h4
+              *ngIf="card.title != 'User info' && card.title != 'Repo List'"
+              style="font-size: 18px"
+            >
+              {{ card.title }}
+            </h4>
+            <mat-icon class="icon">{{ card.icon }}</mat-icon>
+          </div>
+
+          <div *ngIf="card.title === 'Repo List'">
+            <app-search (search)="searchThis($event)"></app-search>
+            <ul
+              style="font-size: 18px"
+              *ngFor="let item of activePageDataChunk"
+            >
+              <p>{{ item.name }}</p>
+            </ul>
+            <mat-paginator
+              [length]="content.length"
+              [pageSize]="pageSize"
+              (page)="onPageChanged($event)"
+            >
+            </mat-paginator>
+          </div>
+
+          <ng-template #info>
+            <div style="margin: 5%">
+              <img
+                mat-card-avatar
+                class="example-header-image"
+                [src]="card.value.img_url"
+              />
+              <div style="display: flex; flex-direction: column">
+                <mat-card-title>{{ card.value.name }}</mat-card-title>
+                <mat-card-subtitle style="font-size: 16px">{{
+                  card.value.location
+                }}</mat-card-subtitle>
+              </div>
+              <mat-card-content>
+                <p style="padding: 2%; font-size: 18px">
+                  {{ card.value.bio }}
+                </p>
+              </mat-card-content>
+              <mat-card-actions style="margin: 5px"> </mat-card-actions>
+            </div>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
