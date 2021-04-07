@@ -15,4 +15,10 @@ export class DataService {
   getRepositories(name: string): Observable<any> {
     return this.http.get<any>(`https://api.github.com/users/${name}/repos`);
   }
+
+  getFollowers(name: string, page: number): Observable<any> {
+    return this.http.get<any>(
+      `https://api.github.com/users/${name}/followers?per_page=100&page=${page}`
+    );
+  }
 }

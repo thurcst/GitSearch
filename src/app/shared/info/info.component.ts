@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -29,15 +29,18 @@ export class InfoComponent implements OnInit {
 
   screenType: number = 0;
 
-  @Input() me: any;
-  @Input() repos: any;
+  @Input() me?: any;
+  @Input() repos?: any;
+  @Input() followers?: any;
+  @Input() actualPage?: number;
+
+  @Output() page = new EventEmitter();
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit(): void {
     this.content = this.repos;
     this.activePageDataChunk = this.content.slice(0, this.pageSize);
-    console.log(this.repos);
     this.smallList = [
       {
         title: 'User info',
@@ -82,9 +85,9 @@ export class InfoComponent implements OnInit {
         icon: 'beenhere',
       },
       {
-        title: 'Repo List',
+        title: 'Followers List',
         cols: 10,
-        rows: 3,
+        rows: 2,
         value: null,
         icon: null,
       },
@@ -134,9 +137,9 @@ export class InfoComponent implements OnInit {
         icon: 'beenhere',
       },
       {
-        title: 'Repo List',
+        title: 'Followers List',
         cols: 10,
-        rows: 3,
+        rows: 2,
         value: null,
         icon: null,
       },
@@ -183,7 +186,6 @@ export class InfoComponent implements OnInit {
         return arrayElement.includes(data.toLowerCase());
       });
     } else {
-      console.log(this.content);
     }
     if (this.content.length < this.firstCut) {
       this.activePageDataChunk = this.content.slice(0, 5);
@@ -197,5 +199,13 @@ export class InfoComponent implements OnInit {
 
   redirectTo(link: string) {
     window.location.href = link;
+  }
+
+  changePage(value: number) {
+    if (this.actualPage != undefined) {
+      this.page.emit(this.actualPage + value);
+    } else {
+      this.page.emit(0);
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { DataService } from './../../services/data.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-searchpage',
@@ -10,7 +10,10 @@ export class SearchpageComponent implements OnInit {
   userInfo: any;
   user: string = '';
   repos: any;
+  followers: any;
   isReady: boolean = false;
+
+  followersPage: number = 1;
 
   newSearch: boolean = false;
 
@@ -30,8 +33,13 @@ export class SearchpageComponent implements OnInit {
         this.userInfo = usr;
         this.dataService.getRepositories(this.user).subscribe((repos) => {
           this.repos = repos;
-          this.newSearch = false;
-          this.isReady = true;
+          this.dataService
+            .getFollowers(this.user, this.followersPage)
+            .subscribe((res) => {
+              this.followers = res;
+              this.newSearch = false;
+              this.isReady = true;
+            });
         });
       },
       (error) => {
@@ -41,5 +49,13 @@ export class SearchpageComponent implements OnInit {
         this.isReady = false;
       }
     );
+  }
+  attPage(newPage: number) {
+    this.followersPage = newPage;
+    this.dataService
+      .getFollowers(this.user, this.followersPage)
+      .subscribe((res) => {
+        this.followers = res;
+      });
   }
 }

@@ -12,5 +12,12 @@
   </div>
 </div>
 
-<app-info [me]="userInfo" [repos]="repos" *ngIf="isReady && !newSearch">
+<app-info
+  [me]="userInfo"
+  [repos]="repos"
+  [followers]="followers"
+  [actualPage]="followersPage"
+  (page)="attPage($event)"
+  *ngIf="isReady && !newSearch"
+>
 </app-info>

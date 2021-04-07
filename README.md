@@ -18,7 +18,7 @@ _Observação importante_: **NÃO** altere a porta, o Auth0 vai parar de funcion
 
 Para descobrir os comandos disponíveis use `ng help` ou olhe na documentação oficial do mesmo. [(aqui)](https://angular.io/cli).
 
-# NINA Team e o desafio
+# #TeamNINA e o desafio
 
 #### O desafio, dificuldades, aprendizados e conclusão
 
@@ -46,9 +46,11 @@ Primeiramente, queria agradecer a oportunidade de poder ter participado dessa se
 - [ ] Deploy em AWS e AWS via Yaml (Extra)
 - [ ] NgRx (Extra)
 
-## O Projeto foi totalmente concluído?
+_Obs:_ Não sei se o sistema de paginação deveria ser Client-Side ou utilizando Query Params, então fiz Client-Side.
 
-> _Não._ Como disse um pouco antes, a etapa 2 não foi possível ser concluída tendo em vista algumas limitações.
+## Quais foram as maiores dificuldades?
+
+Implementação da estrutura do Redux, mesmo sendo um projeto pequeno, são muitas subestruturas para serem feitas, e eu tive que escolher entre terminar tudo e fazer um design responsivo/apresentável ou o Redux (que era um extra).
 
 ## Das tecnologias presentes no trabalho quais eu tinha e quais eu não tinha conhecimento antes do projeto?
 

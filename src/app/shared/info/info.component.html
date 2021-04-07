@@ -4,16 +4,75 @@
     [colspan]="card.cols"
     [rowspan]="card.rows"
   >
-    <mat-card class="dashboard-card">
+    <mat-card
+      class="dashboard-card"
+      style="
+        background-color: white;
+        display: grid;
+        overflow: auto;
+        grid-template-columns: repeat(auto-fit, minmax(10px, auto));
+      "
+      *ngIf="card.title === 'Followers List' && followers.length > 0"
+    >
       <mat-card-content class="dashboard-card-content">
-        <div *ngIf="card.title !== 'User info'; else info" class="content">
+        <div *ngIf="card.title === 'Followers List' && followers.length > 0">
+          <mat-list
+            style="
+              display: flex;
+              min-width: 180px;
+              min-height: 180px;
+              align-items: center;
+              overflow: auto;
+            "
+          >
+            <mat-list-item *ngFor="let element of followers">
+              <div class="userCard">
+                <img
+                  [src]="element.avatar_url"
+                  style="max-width: 80px; border-radius: 50%"
+                />
+                <h1 style="margin-top: 10px">{{ element.login }}</h1>
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </div>
+        <div style="width: 100px">
+          <button
+            mat-icon-button
+            (click)="changePage(-1)"
+            *ngIf="!(actualPage === 1)"
+          >
+            <mat-icon style="font-size: 30px">arrow_back </mat-icon>
+          </button>
+          <p>{{ actualPage }}</p>
+          <button
+            mat-icon-button
+            (click)="changePage(1)"
+            *ngIf="!(followers.length < 100)"
+          >
+            <mat-icon style="font-size: 30px">arrow_forward </mat-icon>
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="dashboard-card" *ngIf="card.title !== 'Followers List'">
+      <mat-card-content class="dashboard-card-content">
+        <div
+          *ngIf="
+            card.title !== 'User info' && card.title !== 'Followers Lis';
+            else info
+          "
+          class="content"
+        >
           <h1>{{ card.value }}</h1>
-          <div *ngIf="card.title != 'User info' && card.title != 'Repo List'">
+          <div
+            *ngIf="card.title != 'User info' && card.title != 'Followers List'"
+          >
             <h2>{{ card.title }}</h2>
           </div>
           <mat-icon class="icon">{{ card.icon }}</mat-icon>
         </div>
-
         <ng-template #info>
           <div style="margin: 5%">
             <img
