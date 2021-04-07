@@ -1,118 +1,148 @@
 # GithubApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.7.
+O projeto foi criado utilizando [Angular CLI](https://github.com/angular/angular-cli) version 11.2.7 e funciona perfeitamente em servidor local. (Tem algumas explicações do motivo de estar em local no decorrer do README).
 
-## Development server
+## Como rodar o servidor?
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Antes de tudo, clone o repositório em sua máquina:
 
-## Code scaffolding
+```
+git clone https://github.com/thurcst/GitSearch.git
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Abra o terminal (ou prompt para windows) e execute `npm install` e em seguida `ng serve --open` Isso iniciará o servidor e abrirá uma janela no seu navegador assim que estiver pronto. Em modo de desenvolvimento existe o live reload, logo, qualquer alteração feita no código será automaticamente atualizada.
 
-## Build
+_Observação importante_: **NÃO** altere a porta, o Auth0 vai parar de funcionar caso seja feito.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Dúvidas sobre o Angular?
 
-## Running unit tests
+Para descobrir os comandos disponíveis use `ng help` ou olhe na documentação oficial do mesmo. [(aqui)](https://angular.io/cli).
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# NINA Team e o desafio
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-# Trinity
-
-#### O desafio foi disponibilizado no dia 22/01/2020 às 16:42 e deveria ser entregue no dia 24/01 às 12:00. Devido ao curto tempo, não foi possível completar o desafio tendo em vista que o prazo deveria ter sido de 7 dias.
+#### O desafio, dificuldades, aprendizados e conclusão
 
 Primeiramente, queria agradecer a oportunidade de poder ter participado dessa seleção e mostrar um pouco da minha capacidade como um profissional, foi uma experiência nova, cheia de desafios e muito gratificante. Cada tarefa cumprida teve seus obstáculos e toda a tragetória foi muito interessante. Infelizmente não foi possível por em prática tudo que eu queria, tive algumas ideias que iriam tomar muito tempo para implementação e por isso foram deixadas de lado.
 
+**Os bugs mais chatos que enfrentei:**
+
+1. O serviço de autenticação do Github [(esse aqui)](https://docs.github.com/pt/developers/apps/authorizing-oauth-apps) não funciona para páginas HTTP, apenas para as que rodam em HTTPS, não aceitava meu POST de forma nenhuma, então tive que utilizar um outro meio de login (ainda utilizando a conta do Github), que é o Auth0. A autenticação ocorre normalmente. A outra forma de autenticação foi feita e estava quase finalizada (não apaguei para caso ainda assim servisse para mostrar como eu estava fazendo, é um service).
+2. Tive sérios problemas enquanto implementava o NgRx, então optei por uma outra biblioteca de Redux (tive que correr para pedir ajuda aos universitários) mas mesmo assim não obtive sucesso. Foi minha primeira experiência tentando implementar Redux em um projeto.
+3. Material Design me ajudou muito a ganhar tempo mas também foi um problema em várias vezes que precisei mexer em alguns design.
+
 **Aqui segue algumas atividades que faltaram concluir:**
 
-1. Não consegui fazer o sistema de rotas atualizar a página automaticamente, para acessar os detalhes do usuário é necessário colocar /app no link
-2. Não consegui fazer renderizar os repositórios, apesar de que todos estão no localStorage e podem ser observados no painel de memória a partir de _Inspecionar elemento_ no navegador.
-3. O botão de busca só funciona na tela inicial, apesar de ter sido feito também na tela de detalhes.
-4. Mensagem de not found não foi implementada :(
-
-**Algumas que foram feitas mas talvez não consigam ser observadas:**
-
-1. Não é possível acessar o /app se não tiver encontrado o usuário que está sendo procurado.
-2. Este README foi escrito em menos de 1 hora, pois já estava a 20 horas sem dormir.
-3. O código foi comentado ao máximo para maior entendimento do _juiz_ que fará revisão do mesmo.
+1. Não tenho acesso ao serviço de AWS, logo, não consegui colocar o serviço na núvem. (Amazon não cobra pelo serviço até certo ponto mas é necessário o uso de cartão de crédito para validar a conta).
+2. Implementação do Redux
 
 ### Listas das subatividades presentes nos desafios:
 
-- [x] Buscar e receber informações do usuário na API do Github.
-- [ ] Atualizar a página e redirecionar para uma página com os detalhes do usuário.
-- [x] Apresentar os detalhes do usuário na tela.
-- [x] Utilizar o sistema de routes.
-- [x] Na tela apresentar localização, número de seguidos, avatar, email e bio.
-- [ ] Listar repositórios do usuário ordenado pelo número decrescente de estrelas
+- [x] Buscar e receber informações do usuário na API do Github. (Consumo de API);
+- [x] Serviço de autenticação utilizando conta do Github. (Consumo de API);
+- [x] Tela de login;
+- [x] Tela de perfil;
+- [x] Pesquisa de repositórios & paginação;
+- [x] Angular 2+ & RXJS & Smart and Dumb components;
+- [ ] Deploy em AWS e AWS via Yaml (Extra)
+- [ ] NgRx (Extra)
 
 ## O Projeto foi totalmente concluído?
 
-> _Não._ Grande parte do que era utilizado na tecnologia React era desconhecido por mim, tive que pesquisar praticamente tudo, mas foi um aprendizado muito bom, apesar de não ter obtido o resultado desejado.
+> _Não._ Como disse um pouco antes, a etapa 2 não foi possível ser concluída tendo em vista algumas limitações.
 
-## Das tecnologias presentes no trabalho quais eu tinha conhecimento antes do projeto?
+## Das tecnologias presentes no trabalho quais eu tinha e quais eu não tinha conhecimento antes do projeto?
 
-> Apenas Javascript, e muito básico. Mexer com o JS e o CSS foi uma experiência nova e muito gratificante, apesar das dores de cabeça. ~haha~.
+##### Conhecidas:
 
-# Tutorial de instalação
+> > Eu já venho trabalhando com Angular a um tempo (logo logo farei 6 meses com a tecnologia) apesar de utilizar em Mobile (Ionic). Toda a parte de requisições REST, Rxjs, Typescript, HTML e CSS já conheço e utilizo há algum tempo.
 
-> Essa parte ficou um pouco subjetiva, não disseram de fato o que seria o tutorial, logo, explicarei como instalar o react e como rodar a aplicação no sistema que eu utilizo atualmente (Ubuntu 19.10).
+##### Desconhecidas:
 
-### Segue o passo a passo:
+> > Ngrx e AWS, este projeto seria a primeira vez que eu utilizaria ambos, entretanto, não consegui por em prática.
 
-**Abra o terminal e execute o seguinte comando para instalar o nodejs:**
+### Rotas utilizadas no projeto:
 
+Aqui se encontram todas as APIs abertas fornecidas pelo github
+
+```JSON
+{
+  "current_user_url": "https://api.github.com/user",
+  "current_user_authorizations_html_url": "https://github.com/settings/connections/applications{/client_id}",
+  "authorizations_url": "https://api.github.com/authorizations",
+  "code_search_url": "https://api.github.com/search/code?q={query}{&page,per_page,sort,order}",
+  "commit_search_url": "https://api.github.com/search/commits?q={query}{&page,per_page,sort,order}",
+  "emails_url": "https://api.github.com/user/emails",
+  "emojis_url": "https://api.github.com/emojis",
+  "events_url": "https://api.github.com/events",
+  "feeds_url": "https://api.github.com/feeds",
+  "followers_url": "https://api.github.com/user/followers",
+  "following_url": "https://api.github.com/user/following{/target}",
+  "gists_url": "https://api.github.com/gists{/gist_id}",
+  "hub_url": "https://api.github.com/hub",
+  "issue_search_url": "https://api.github.com/search/issues?q={query}{&page,per_page,sort,order}",
+  "issues_url": "https://api.github.com/issues",
+  "keys_url": "https://api.github.com/user/keys",
+  "label_search_url": "https://api.github.com/search/labels?q={query}&repository_id={repository_id}{&page,per_page}",
+  "notifications_url": "https://api.github.com/notifications",
+  "organization_url": "https://api.github.com/orgs/{org}",
+  "organization_repositories_url": "https://api.github.com/orgs/{org}/repos{?type,page,per_page,sort}",
+  "organization_teams_url": "https://api.github.com/orgs/{org}/teams",
+  "public_gists_url": "https://api.github.com/gists/public",
+  "rate_limit_url": "https://api.github.com/rate_limit",
+  "repository_url": "https://api.github.com/repos/{owner}/{repo}",
+  "repository_search_url": "https://api.github.com/search/repositories?q={query}{&page,per_page,sort,order}",
+  "current_user_repositories_url": "https://api.github.com/user/repos{?type,page,per_page,sort}",
+  "starred_url": "https://api.github.com/user/starred{/owner}{/repo}",
+  "starred_gists_url": "https://api.github.com/gists/starred",
+  "user_url": "https://api.github.com/users/{user}",
+  "user_organizations_url": "https://api.github.com/user/orgs",
+  "user_repositories_url": "https://api.github.com/users/{user}/repos{?type,page,per_page,sort}",
+  "user_search_url": "https://api.github.com/search/users?q={query}{&page,per_page,sort,order}",
+  "login": "https://github.com/login/oauth/authorize?client_id={client_id}"
+}
 ```
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-sudo apt-get install -y nodejs
+
+Dessas APIS, utilizei:
+
+|          API          |   Service    |
+| :-------------------: | :----------: |
+|       user_url        | DataService  |
+| user_repositories_url | DataService  |
+|     followers_url     | DataService  |
+|         login         | LoginService |
+
+#### Rotas da aplicação:
+
+1. /login
+
+   - Tela inicial, redireciona para o serviço do Auth0 e caso esteja logado, redireciona para a dashboard
+
+2. /dashboard
+
+   - Rota onde se encontra as informações de Perfil do usuário
+
+3. /search
+
+   - Tela de pesquisa, onde é possível buscar por usuários do Github
+
+4. /about
+
+   - Routa que eu usei pra deixar meu Card com minhas redes sociais
+
+5. default
+   - Qualquer outra tela redireciona de volta para a dashboard
+
+**Algumas tecnologias que eu uso (e usei) e sempre me ajudam:**
+
+1. Prettier (Code Formatting) acelera na produção e organiza o código
+2. ESLint (Nesse caso foi utilizado TSLint pois já veio configurado e adianta bastante o trabalho)
+
+**Algumas que foram feitas mas talvez não consigam ser observadas:**
+
+1. A página about foi feita com muito carinho.
+2. Este README foi escrito em menos de 1 hora.
+3. O site está _muito_ responsivo! (Exceto pra tablet, rs)
+
+```HTML
+Um forte abraço, espero que você, leitor(a), esteja bem e saudável. Tempos melhores estão por vir!
 ```
-
-**Agora, o NPM (Node Package Manager)**
-
-```
-sudo npm install npm@latest -g
-```
-
-**A Ferramenta para criar projetos é instalada pelo próprio NPM utilizando o comando:**
-
-```
-npm install -g create-react-app
-```
-
-**Para criar um novo projeto (Pode demorar alguns minutos):**
-
-```
-create-react-app awesome-project
-```
-
-**Após isso, só entrar na pasta que foi criada, apertar botão direito e abrir a pasta pelo terminal e escrever o seguinte comando:**
-
-```
-npm start
-```
-
-**Pronto, teu projeto vai estar rodando e a cada modificação, é só salvar o arquivo e ele vai atualizar a página pra ti! :D**
-
-## Para rodar o meu é só seguir esses passos:
-
-**Abre o terminal na área de trabalho ou qualquer outro lugar que você queira e digita o seguimte comando:**
-
-```
-git clone https://github.com/thurcst/Trinity.git
-```
-
-**O download vai começar logo após, já que meu repositório é público.**
-
-**Após isso, é só entrar na pasta e usar o comando _npm start_ no terminal**
-
-#### Qualquer dúvida estou disponível através do instagram ou email, ficarei muito feliz em responder todas perguntas sobre o trabalho!
-
-> May the force be with you

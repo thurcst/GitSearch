@@ -40,49 +40,52 @@
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>
-  <mat-grid-tile [colspan]="10" [rowspan]="1">
+  <mat-grid-tile [colspan]="10" [rowspan]="1" *ngIf="repos.length > 0">
     <mat-card class="dashboard-card">
       <div style="flex-direction: row; margin-top: 25px; margin-left: 40px">
         <app-search (search)="searchThis($event)"></app-search>
       </div>
     </mat-card>
   </mat-grid-tile>
-  <mat-grid-tile
-    *ngFor="let item of activePageDataChunk"
-    [colspan]="screenType === 1 ? 5 : 2"
-    [rowspan]="2"
-  >
-    <mat-card class="dashboard-card">
-      <div
-        style="
-          justify-content: center;
-          align-items: center;
-          margin: auto;
-          text-align: center;
-          margin-top: 45px;
-        "
-      >
-        <h1>{{ item.name }}</h1>
-        <h3 style="color: darkblue">{{ item.language || "Unknow" }}</h3>
-        <p>
-          Watchers: <b>{{ item.watchers }}</b>
-        </p>
-        <p>
-          Forks: <b>{{ item.forks }}</b>
-        </p>
-        <mat-card-actions>
-          <button mat-icon-button (click)="redirectTo(item.html_url)">
-            <mat-icon class="icon">launch</mat-icon>
-          </button>
-          <button mat-icon-button>
-            <mat-icon class="icon">content_copy</mat-icon>
-          </button>
-        </mat-card-actions>
-      </div>
-    </mat-card>
-  </mat-grid-tile>
+  <div *ngIf="repos.length > 0">
+    <mat-grid-tile
+      *ngFor="let item of activePageDataChunk"
+      [colspan]="screenType === 1 ? 5 : 2"
+      [rowspan]="2"
+    >
+      <mat-card class="dashboard-card">
+        <div
+          style="
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            text-align: center;
+            margin-top: 45px;
+          "
+        >
+          <h1>{{ item.name }}</h1>
+          <h3 style="color: darkblue">{{ item.language || "Unknow" }}</h3>
+          <p>
+            Watchers: <b>{{ item.watchers }}</b>
+          </p>
+          <p>
+            Forks: <b>{{ item.forks }}</b>
+          </p>
+          <mat-card-actions>
+            <button mat-icon-button (click)="redirectTo(item.html_url)">
+              <mat-icon class="icon">launch</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon class="icon">content_copy</mat-icon>
+            </button>
+          </mat-card-actions>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+  </div>
 </mat-grid-list>
 <mat-paginator
+  *ngIf="repos.length > 0"
   [length]="content.length"
   [pageSize]="pageSize"
   (page)="onPageChanged($event)"
