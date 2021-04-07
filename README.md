@@ -35,6 +35,8 @@ Primeiramente, queria agradecer a oportunidade de poder ter participado dessa se
 1. Não tenho acesso ao serviço de AWS, logo, não consegui colocar o serviço na núvem. (Amazon não cobra pelo serviço até certo ponto mas é necessário o uso de cartão de crédito para validar a conta).
 2. Implementação do Redux
 
+###### Curiosidade: Pesquisei pelo perfil do fabpot mais de 50 vezes durante o desenvolvimento
+
 ### Listas das subatividades presentes nos desafios:
 
 - [x] Buscar e receber informações do usuário na API do Github. (Consumo de API);
@@ -139,11 +141,39 @@ Dessas APIS, utilizei:
 1. Prettier (Code Formatting) acelera na produção e organiza o código
 2. ESLint (Nesse caso foi utilizado TSLint pois já veio configurado e adianta bastante o trabalho)
 
+**Prints da aplicação pronta:**
+
+- Login Screen
+  ![Login](https://i.postimg.cc/hGNgNsPw/login.png)
+
+- Autenticador Auth0
+  ![Auth](https://i.postimg.cc/PqbkJwWV/authenticator.png)
+
+- Profile
+  ![Profile](https://i.postimg.cc/3NThxwGF/profile.png)
+
+- Pesquisa por usuários
+  ![Search](https://i.postimg.cc/c4dZqr0s/Sem-t-tulo.png)
+
+- Cards de Repositório + Search Bar
+  ![Git Cards and Search Bar](https://i.postimg.cc/Bvj4hksH/cards.png)
+
+- Cards sem filtro
+  ![Cards](https://i.postimg.cc/cCBSgNMy/without-filter.png)
+
+- Paginação
+  ![Pagina 2](https://i.postimg.cc/j5NKTfDj/pag-2.png)
+
+- Cards filtrados por nome
+  ![Git Cards Filered](https://i.postimg.cc/bYx8FQXC/filtered.png)
+
 **Algumas que foram feitas mas talvez não consigam ser observadas:**
 
 1. A página about foi feita com muito carinho.
 2. Este README foi escrito em menos de 1 hora.
 3. O site está _muito_ responsivo! (Exceto pra tablet, rs)
+4. Os cards de Seguidores são botões
+5. Caso o usuário não tenha repositórios ou seguidores, nenhum dos dois tipos de cards são apresentados
 
 ```HTML
 Um forte abraço, espero que você, leitor(a), esteja bem e saudável. Tempos melhores estão por vir!

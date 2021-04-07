@@ -23,6 +23,7 @@ export class SearchpageComponent implements OnInit {
 
   search(user: string) {
     this.newSearch = true;
+    this.followersPage = 1;
     if (user === '') {
       return;
     }
