@@ -1,3 +1,4 @@
+import { AuthService } from '@auth0/auth0-angular';
 import { DataService } from './../../services/data.service';
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
@@ -9,98 +10,47 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
-  // Store my infos
-  me: any;
+  me: any; // Store my infos
 
-  // Store my Repos
-  repos: any;
+  repos: any; // Store my Repos
 
-  // Actualy the state managemant (lol)
-  isReady = false;
+  isReady = false; // Actualy the state managemant (lol)
 
-  // cards for angular material
-  cards: any;
+  cards: any; // cards for angular material
 
-  // User (while login system isn't ready)
-  user: string = 'IsaacBernardes';
+  user: string = ''; // User (while login system isn't ready)
 
-  // result from search bar
-  content: any;
+  content: any; // result from search bar
 
   // Actual slice from list
+
   activePageDataChunk: any;
   firstCut: number = 0;
-  secondCut: number = 4;
+  secondCut: number = 10;
 
-  // Default page size
-  pageSize: number = 10;
+  pageSize: number = 10; // Default page size
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private dataService: DataService
+    private dataService: DataService,
+    public auth: AuthService
   ) {
-    this.startComponent().then(() => {
-      this.cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-        map(({ matches }) => {
-          if (matches) {
-            return [
-              {
-                title: 'User info',
-                cols: 10,
-                rows: 2,
-                value: {
-                  bio: this.me.bio,
-                  company: this.me.company,
-                  email: this.me.email,
-                  location: this.me.location,
-                  login: this.me.login,
-                  name: this.me.name,
-                  img_url: this.me.avatar_url,
-                },
-                icon: null,
-              },
-              {
-                title: 'Repos',
-                cols: 5,
-                rows: 1,
-                value: this.me.public_repos,
-                icon: 'menu_book',
-              },
-              {
-                title: 'Gists',
-                cols: 5,
-                rows: 1,
-                value: this.me.public_gists,
-                icon: 'lock',
-              },
-              {
-                title: 'Following',
-                cols: 5,
-                rows: 1,
-                value: this.me.following,
-                icon: 'turned_in',
-              },
-              {
-                title: 'Followers',
-                cols: 5,
-                rows: 1,
-                value: this.me.followers,
-                icon: 'beenhere',
-              },
-              {
-                title: 'Repo List',
-                cols: 10,
-                rows: 3,
-                value: null,
-                icon: null,
-              },
-            ];
-          }
+    this.auth.user$.subscribe((user) => {
+      this.user = user.nickname;
+      this.startComponent().then(() => {
+        this.startCards();
+      });
+    });
+  }
 
+  startCards(): void {
+    this.cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+      map(({ matches }) => {
+        if (matches) {
           return [
             {
               title: 'User info',
-              cols: 6,
+              cols: 10,
               rows: 2,
               value: {
                 bio: this.me.bio,
@@ -111,31 +61,32 @@ export class DashboardComponent {
                 name: this.me.name,
                 img_url: this.me.avatar_url,
               },
+              icon: null,
             },
             {
               title: 'Repos',
-              cols: 2,
+              cols: 5,
               rows: 1,
               value: this.me.public_repos,
               icon: 'menu_book',
             },
             {
               title: 'Gists',
-              cols: 2,
+              cols: 5,
               rows: 1,
               value: this.me.public_gists,
               icon: 'lock',
             },
             {
               title: 'Following',
-              cols: 2,
+              cols: 5,
               rows: 1,
               value: this.me.following,
               icon: 'turned_in',
             },
             {
               title: 'Followers',
-              cols: 2,
+              cols: 5,
               rows: 1,
               value: this.me.followers,
               icon: 'beenhere',
@@ -148,35 +99,78 @@ export class DashboardComponent {
               icon: null,
             },
           ];
-        })
-      );
+        }
+        return [
+          {
+            title: 'User info',
+            cols: 6,
+            rows: 2,
+            value: {
+              bio: this.me.bio,
+              company: this.me.company,
+              email: this.me.email,
+              location: this.me.location,
+              login: this.me.login,
+              name: this.me.name,
+              img_url: this.me.avatar_url,
+            },
+          },
+          {
+            title: 'Repos',
+            cols: 2,
+            rows: 1,
+            value: this.me.public_repos,
+            icon: 'menu_book',
+          },
+          {
+            title: 'Gists',
+            cols: 2,
+            rows: 1,
+            value: this.me.public_gists,
+            icon: 'lock',
+          },
+          {
+            title: 'Following',
+            cols: 2,
+            rows: 1,
+            value: this.me.following,
+            icon: 'turned_in',
+          },
+          {
+            title: 'Followers',
+            cols: 2,
+            rows: 1,
+            value: this.me.followers,
+            icon: 'beenhere',
+          },
+          {
+            title: 'Repo List',
+            cols: 10,
+            rows: 3,
+            value: null,
+            icon: null,
+          },
+        ];
+      })
+    );
+  }
+
+  async startComponent(): Promise<void> {
+    // Get all data from github Rest API
+    await this.dataService.getUsuario(this.user).subscribe((res) => {
+      this.me = res;
+      this.dataService.getRepositories(this.user).subscribe((res) => {
+        this.repos = res;
+        this.content = res;
+        this.activePageDataChunk = this.content.slice(0, this.pageSize);
+        console.log(this.repos);
+        this.isReady = true;
+      });
     });
   }
 
-  async startComponent() {
-    // Get all data from github Rest API
-
-    await this.dataService
-      .getUser(this.user)
-      .then((res) => {
-        this.me = res;
-        console.log(res);
-      })
-      .then(() => {
-        this.dataService.getRepos(this.user).then((res) => {
-          this.repos = res;
-          this.content = res;
-          this.activePageDataChunk = this.content.slice(0, this.pageSize);
-          console.log(res);
-          this.isReady = true;
-        });
-      })
-      .catch((e) => console.log(e));
-  }
-
-  onPageChanged(e: any) {
+  onPageChanged(e: any): void {
     // Handle page change
-
     this.firstCut = e.pageIndex * e.pageSize;
     this.secondCut = this.firstCut + e.pageSize;
     this.activePageDataChunk = this.content.slice(
@@ -185,10 +179,10 @@ export class DashboardComponent {
     );
   }
 
-  searchThis(data: any) {
+  searchThis(data: any): void {
     // Search for the target on the repository list
-
     this.content = this.repos;
+    this.activePageDataChunk = this.content.slice(0, 10);
     if (data) {
       this.content = this.content.filter(function (
         element: any,
@@ -196,7 +190,7 @@ export class DashboardComponent {
         array: any
       ) {
         let arrayElement = element.name.toLowerCase();
-        return arrayElement.includes(data);
+        return arrayElement.includes(data.toLowerCase());
       });
     } else {
       console.log(this.content);
@@ -209,5 +203,9 @@ export class DashboardComponent {
         this.secondCut
       );
     }
+  }
+
+  redirectTo(link: string) {
+    window.location.href = link;
   }
 }

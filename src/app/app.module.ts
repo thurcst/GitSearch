@@ -25,6 +25,9 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
 import { SearchComponent } from './shared/search/search.component';
+import { StoreModule } from '@ngrx/store';
+import { LoadingComponent } from './views/loading/loading.component';
+import { AuthModule } from '@auth0/auth0-angular';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,7 @@ import { SearchComponent } from './shared/search/search.component';
     NavigationComponent,
     DashboardComponent,
     SearchComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +57,13 @@ import { SearchComponent } from './shared/search/search.component';
     MatListModule,
     MatMenuModule,
     HttpClientModule,
+    StoreModule.forRoot({}, {}),
+    AuthModule.forRoot({
+      domain: 'dev-arth.us.auth0.com',
+      clientId: 'kG15OcSMqWFQL9zHGCwaMCeBhFWrJRDX',
+      cacheLocation: 'localstorage',
+      useRefreshTokens: true,
+    }),
   ],
   providers: [DataService],
   bootstrap: [AppComponent],

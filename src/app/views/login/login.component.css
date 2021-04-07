@@ -1,3 +1,26 @@
 * {
-  background-color: purple;
+  background-color: #3f3fd6;
+}
+
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.title {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 100px;
+}
+
+body,
+h1 {
+  font-family: "Poppins", sans-serif;
+}
+body,
+html {
+  height: 100%;
+}
+.bgimg {
+  min-height: 100%;
 }

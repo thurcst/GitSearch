@@ -9,32 +9,46 @@
         <mat-card-content class="dashboard-card-content">
           <div *ngIf="card.title !== 'User info'; else info" class="content">
             <h1>{{ card.value }}</h1>
-            <h4
-              *ngIf="card.title != 'User info' && card.title != 'Repo List'"
-              style="font-size: 18px"
-            >
-              {{ card.title }}
-            </h4>
+            <div *ngIf="card.title != 'User info' && card.title != 'Repo List'">
+              <h2>{{ card.title }}</h2>
+            </div>
             <mat-icon class="icon">{{ card.icon }}</mat-icon>
           </div>
 
-          <div *ngIf="card.title === 'Repo List'">
-            <app-search (search)="searchThis($event)"></app-search>
-            <ul
-              style="font-size: 18px"
-              *ngFor="let item of activePageDataChunk"
-            >
-              <p>{{ item.name }}</p>
-            </ul>
-            <mat-paginator
-              [length]="content.length"
-              [pageSize]="pageSize"
-              (page)="onPageChanged($event)"
-            >
-            </mat-paginator>
-          </div>
-
           <ng-template #info>
+            <!-- <div class="wrapper">
+              <div class="icon arrow"><i class="fas fa-arrow-left"></i></div>
+              <div class="icon dots"><i class="fas fa-ellipsis-v"></i></div>
+              <div class="name">{{ card.value.name }}</div>
+              <div class="about">Designer & Developer</div>
+              <div class="social-icons">
+                <a href="#" class="fb"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="insta"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="yt"><i class="fab fa-youtube"></i></a>
+              </div>
+              <div class="buttons">
+                <button>Message</button>
+                <button>Subscribe</button>
+              </div>
+              <div class="social-share">
+                <div class="row">
+                  <i class="far fa-heart"></i>
+                  <i class="icon-2 fas fa-heart"></i>
+                  <span>20.4k</span>
+                </div>
+                <div class="row">
+                  <i class="far fa-comment"></i>
+                  <i class="icon-2 fas fa-comment"></i>
+                  <span>14.3k</span>
+                </div>
+                <div class="row">
+                  <i class="fas fa-share"></i>
+                  <span>12.8k</span>
+                </div>
+              </div>
+            </div> -->
+
             <div style="margin: 5%">
               <img
                 mat-card-avatar
@@ -43,7 +57,7 @@
               />
               <div style="display: flex; flex-direction: column">
                 <mat-card-title>{{ card.value.name }}</mat-card-title>
-                <mat-card-subtitle style="font-size: 16px">{{
+                <mat-card-subtitle style="font-size: 16px; padding-top: 5px">{{
                   card.value.location
                 }}</mat-card-subtitle>
               </div>
@@ -58,5 +72,52 @@
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
+    <mat-grid-tile [colspan]="10" [rowspan]="1">
+      <mat-card class="dashboard-card">
+        <div style="flex-direction: row; margin-top: 25px; margin-left: 40px">
+          <app-search (search)="searchThis($event)"></app-search>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile
+      *ngFor="let item of activePageDataChunk"
+      [colspan]="2"
+      [rowspan]="2"
+    >
+      <mat-card class="dashboard-card">
+        <div
+          style="
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            text-align: center;
+            margin-top: 45px;
+          "
+        >
+          <h1>{{ item.name }}</h1>
+          <h3 style="color: darkblue">{{ item.language || "Unknow" }}</h3>
+          <p>
+            Watchers: <b>{{ item.watchers }}</b>
+          </p>
+          <p>
+            Forks: <b>{{ item.forks }}</b>
+          </p>
+          <mat-card-actions>
+            <button mat-icon-button (click)="redirectTo(item.html_url)">
+              <mat-icon class="icon">launch</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon class="icon">content_copy</mat-icon>
+            </button>
+          </mat-card-actions>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
   </mat-grid-list>
+  <mat-paginator
+    [length]="content.length"
+    [pageSize]="pageSize"
+    (page)="onPageChanged($event)"
+  >
+  </mat-paginator>
 </div>
