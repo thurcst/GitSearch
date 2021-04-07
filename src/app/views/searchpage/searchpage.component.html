@@ -1,0 +1,16 @@
+<div class="container">
+  <div style="display: flex">
+    <input
+      class="searchBar"
+      [(ngModel)]="user"
+      type="text"
+      placeholder="Search.."
+    />
+    <button (click)="search(user)" mat-fab color="primary" style="left: -40px">
+      <mat-icon> search </mat-icon>
+    </button>
+  </div>
+</div>
+
+<app-info [me]="userInfo" [repos]="repos" *ngIf="isReady && !newSearch">
+</app-info>

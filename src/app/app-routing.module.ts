@@ -1,5 +1,5 @@
-import { SearchComponent } from './shared/search/search.component';
-import { NavigationComponent } from './views/navigation/navigation.component';
+import { AboutComponent } from './views/about/about.component';
+import { SearchpageComponent } from './views/searchpage/searchpage.component';
 import { LoadingComponent } from './views/loading/loading.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'login/github', component: LoadingComponent },
   { path: '', component: DashboardComponent },
-  { path: 'search', component: SearchComponent },
+  { path: 'search', component: SearchpageComponent },
+  { path: 'about', component: AboutComponent },
 ];
 
 @NgModule({

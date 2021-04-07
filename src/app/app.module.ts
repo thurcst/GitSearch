@@ -28,6 +28,9 @@ import { SearchComponent } from './shared/search/search.component';
 import { StoreModule } from '@ngrx/store';
 import { LoadingComponent } from './views/loading/loading.component';
 import { AuthModule } from '@auth0/auth0-angular';
+import { SearchpageComponent } from './views/searchpage/searchpage.component';
+import { InfoComponent } from './shared/info/info.component';
+import { AboutComponent } from './views/about/about.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,9 @@ import { AuthModule } from '@auth0/auth0-angular';
     DashboardComponent,
     SearchComponent,
     LoadingComponent,
+    SearchpageComponent,
+    InfoComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

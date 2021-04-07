@@ -1,0 +1,21 @@
+<div class="content">
+  <div class="card">
+    <img [src]="link" alt="Arthur Henrique" style="width: 100%" />
+    <div class="container">
+      <h2>Arthur Henrique</h2>
+      <p class="title">Pesquisador e Desenvolvedor</p>
+      <p>Apaixonado por pizza, jogos e música.</p>
+      <p>20 anos, 1 cachorro e vários sonhos.</p>
+      <div style="display: flex; justify-content: space-around">
+        <button
+          class="button"
+          mat-button
+          *ngFor="let media of socialMedias"
+          (click)="redirectTo(media)"
+        >
+          {{ media.name }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

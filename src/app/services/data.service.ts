@@ -15,18 +15,4 @@ export class DataService {
   getRepositories(name: string): Observable<any> {
     return this.http.get<any>(`https://api.github.com/users/${name}/repos`);
   }
-
-  // async getUser(name: string): Promise<any> {
-  //   var user = await this.http
-  //     .get(`https://api.github.com/users/${name}`)
-  //     .toPromise();
-  //   return user;
-  // }
-
-  // async getRepos(name: string): Promise<any> {
-  //   var repos = await this.http
-  //     .get(`https://api.github.com/users/${name}/repos`)
-  //     .toPromise();
-  //   return repos;
-  // }
 }
