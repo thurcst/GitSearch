@@ -198,7 +198,8 @@ export class InfoComponent implements OnInit {
   }
 
   redirectTo(link: string) {
-    window.location.href = link;
+    // window.location.href = link;
+    window.open(link);
   }
 
   changePage(value: number) {

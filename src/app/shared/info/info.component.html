@@ -25,7 +25,10 @@
               overflow: auto;
             "
           >
-            <mat-list-item *ngFor="let element of followers">
+            <mat-list-item
+              *ngFor="let element of followers"
+              (click)="redirectTo(element.html_url)"
+            >
               <div class="userCard">
                 <img
                   [src]="element.avatar_url"
@@ -133,9 +136,6 @@
           <mat-card-actions>
             <button mat-icon-button (click)="redirectTo(item.html_url)">
               <mat-icon class="icon">launch</mat-icon>
-            </button>
-            <button mat-icon-button>
-              <mat-icon class="icon">content_copy</mat-icon>
             </button>
           </mat-card-actions>
         </div>

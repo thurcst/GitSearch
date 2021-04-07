@@ -23,13 +23,11 @@ export class SearchpageComponent implements OnInit {
 
   search(user: string) {
     this.newSearch = true;
-    console.log(this.user);
     if (user === '') {
       return;
     }
     this.dataService.getUsuario(this.user).subscribe(
       (usr) => {
-        console.log(usr);
         this.userInfo = usr;
         this.dataService.getRepositories(this.user).subscribe((repos) => {
           this.repos = repos;
@@ -44,8 +42,6 @@ export class SearchpageComponent implements OnInit {
       },
       (error) => {
         this.userInfo = null;
-        console.log(error.ok);
-        console.log(error.error.message);
         this.isReady = false;
       }
     );
