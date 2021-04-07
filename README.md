@@ -167,7 +167,7 @@ Dessas APIS, utilizei:
 - Cards filtrados por nome
   ![Git Cards Filered](https://i.postimg.cc/bYx8FQXC/filtered.png)
 
-**Algumas que foram feitas mas talvez não consigam ser observadas:**
+**Algumas que foram feitas mas talvez passem despercebidas:**
 
 1. A página about foi feita com muito carinho.
 2. Este README foi escrito em menos de 1 hora.
